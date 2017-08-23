@@ -5,6 +5,7 @@ import urllib
 import requests
 
 from cache import LimooCache
+from server import sio
 
 LYRICS_SERVER = 'ec2-52-26-245-255.us-west-2.compute.amazonaws.com'
 cache = LimooCache()
@@ -41,9 +42,11 @@ class GetLyrics(threading.Thread):
     def run(self):
         while True:
             try:
-                artist, title = self.queue.get(True, timeout=1)
+                artist, title = self.queue.get(True)
+                sio.emit('song_data', {'artist': artist, 'title': title, 'lyrics': 'Loading...'})
                 print 'Thread!', artist, title
                 lyrics = Lyrics.get(artist, title)
+                sio.emit('song_data', {'artist': artist, 'title': title, 'lyrics': lyrics})
                 print lyrics
                 self.queue.task_done()
             except Queue.Empty:

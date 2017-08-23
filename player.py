@@ -11,6 +11,12 @@ queue = Queue.Queue()
 PLAYER_NAMES = ['spotify', 'rhythmbox', 'vlc', ]  # order is important
 
 
+def init():
+    plyr = get_player()
+    plyr.on('metadata', on_track_change)
+    queue.put((plyr.get_artist(), plyr.get_title()))
+
+
 def get_player():
     for player_name in PLAYER_NAMES:
         player_instance = Playerctl.Player(player_name=player_name)

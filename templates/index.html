@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Limoo</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}" />
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.5/socket.io.min.js"></script>
+    <script type="text/javascript" charset="utf-8">
+        $(document).ready(function() {
+            var namespace = '/';
+            var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port + namespace);
+
+            socket.on('song_data', function(msg) {
+                $('#title').text(msg.artist + ' - ' + msg.title);
+                $('#lyrics').text(msg.lyrics);
+            });
+        })
+    </script>
+</head>
+
+<body>
+    <h2 id="title"></h2>
+    <div id="lyrics" class="spaces"></div>
+</body>
+</html>
