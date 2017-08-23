@@ -1,6 +1,5 @@
 import Queue
 import gi
-import threading
 
 from lyrics import GetLyrics
 

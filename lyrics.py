@@ -24,7 +24,7 @@ class Lyrics(object):
         print url
         try:
             resp = requests.get(url, timeout=10)
-        except requests.ReadTimeout:
+        except requests.Timeout:
             return 'Cannot connect to server :('
         if resp.status_code != 200:
             return 'No lyrics :('
@@ -48,4 +48,3 @@ class GetLyrics(threading.Thread):
                 self.queue.task_done()
             except Queue.Empty:
                 continue
-
