@@ -1,7 +1,6 @@
 import Queue
 import json
 import threading
-import urllib
 import requests
 
 from cache import LimooCache
@@ -21,11 +20,14 @@ class Lyrics(object):
             lyrics = cache.read(artist, title)
             return lyrics
 
-        get_vars = {'artist': artist, 'title': title}
-        url = 'http://%s/lyrics?%s' % (LYRICS_SERVER, urllib.urlencode(get_vars))
+        # get_vars = {'artist': artist, 'title': title}
+        # url = 'http://%s/lyrics?%s' % (LYRICS_SERVER, urllib.urlencode(get_vars))
+        post_data = {'artist': artist, 'title': title}
+        url = 'http://%s/lyrics' % LYRICS_SERVER
         print url
         try:
-            resp = requests.get(url, timeout=10)
+            # resp = requests.get(url, timeout=10)
+            resp = requests.post(url, data=post_data, timeout=10)
         except:
             return 'Cannot connect to server :('
         if resp.status_code != 200:
