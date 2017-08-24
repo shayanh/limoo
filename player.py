@@ -1,8 +1,6 @@
 import Queue
 import gi
 
-from lyrics import GetLyrics
-
 gi.require_version('Playerctl', '1.0')
 from gi.repository import Playerctl, GLib
 
@@ -31,19 +29,5 @@ def on_track_change(player, e):
     title = player.get_title()
     print 'Now playing:'
     print '{artist} - {title}'.format(artist=artist, title=title)
-
     queue.put((artist, title))
 
-
-if __name__ == '__main__':
-    player = get_player()
-    player.on('metadata', on_track_change)
-
-    t = GetLyrics(queue)
-    t.setDaemon(True)
-    t.start()
-
-    queue.put((player.get_artist(), player.get_title()))
-
-    GLib.MainLoop().run()
-    t.join()

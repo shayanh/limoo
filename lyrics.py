@@ -8,6 +8,7 @@ from cache import LimooCache
 from server import sio
 
 LYRICS_SERVER = 'ec2-52-26-245-255.us-west-2.compute.amazonaws.com'
+# LYRICS_SERVER = 'localhost:8000'
 cache = LimooCache()
 
 
@@ -25,7 +26,7 @@ class Lyrics(object):
         print url
         try:
             resp = requests.get(url, timeout=10)
-        except requests.Timeout:
+        except requests.Timeout, requests.ConnectionError:
             return 'Cannot connect to server :('
         if resp.status_code != 200:
             return 'No lyrics :('
@@ -47,7 +48,6 @@ class GetLyrics(threading.Thread):
                 print 'Thread!', artist, title
                 lyrics = Lyrics.get(artist, title)
                 sio.emit('song_data', {'artist': artist, 'title': title, 'lyrics': lyrics})
-                print lyrics
                 self.queue.task_done()
             except Queue.Empty:
                 continue
