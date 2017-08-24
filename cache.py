@@ -13,7 +13,7 @@ class LimooCache(object):
             os.makedirs(self.cache_dir)
 
     def __get_filename(self, artist, title):
-        slug = slugify(unicode(artist) + ' ' + unicode(title))
+        slug = slugify(artist + ' ' + title)
         filename = os.path.join(self.cache_dir, slug)
         return filename
 

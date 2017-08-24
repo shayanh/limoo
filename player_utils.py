@@ -4,15 +4,8 @@ import gi
 gi.require_version('Playerctl', '1.0')
 from gi.repository import Playerctl, GLib
 
-
 queue = Queue.Queue()
 PLAYER_NAMES = ['spotify', 'rhythmbox', 'vlc', ]  # order is important
-
-
-def init():
-    plyr = get_player()
-    plyr.on('metadata', on_track_change)
-    queue.put((plyr.get_artist(), plyr.get_title()))
 
 
 def get_player():
@@ -31,3 +24,4 @@ def on_track_change(player, e):
     print '{artist} - {title}'.format(artist=artist, title=title)
     queue.put((artist, title))
 
+player = get_player()

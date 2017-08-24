@@ -26,7 +26,7 @@ class Lyrics(object):
         print url
         try:
             resp = requests.get(url, timeout=10)
-        except requests.Timeout, requests.ConnectionError:
+        except:
             return 'Cannot connect to server :('
         if resp.status_code != 200:
             return 'No lyrics :('
