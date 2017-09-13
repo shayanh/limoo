@@ -46,6 +46,9 @@ class GetLyrics(threading.Thread):
         while True:
             try:
                 artist, title = self.queue.get(True)
+                if not self.queue.empty():
+                    self.queue.task_done()
+                    continue
                 sio.emit('song_data', {'artist': artist, 'title': title, 'lyrics': 'Loading...'})
                 print 'Thread!', artist, title
                 lyrics = Lyrics.get(artist, title)
