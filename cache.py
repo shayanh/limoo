@@ -36,9 +36,8 @@ class LimooCache(object):
         filename = self.__get_filename(artist, title)
         lyrics = lyrics.encode('utf-8')
         with open(filename, 'w') as f:
-            self.lock.acquire()
-            f.write(lyrics)
-            self.lock.release()
+            with self.lock:
+                f.write(lyrics)
 
     def delete(self, artist, title):
         if not self.has(artist, title):
