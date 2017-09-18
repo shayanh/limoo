@@ -5,7 +5,7 @@ from player_utils import queue, player
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret'
-sio = SocketIO(app)
+sio = SocketIO(app, async_mode='threading')
 
 
 @sio.on('connect')
