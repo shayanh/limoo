@@ -12,7 +12,7 @@ You need python 2.6 or newer python 2.x, [python-pip](https://github.com/pypa/pi
     git clone https://github.com/shayanh/limoo.git
     cd limoo/
     wget https://github.com/acrisci/playerctl/releases/download/v0.5.0/playerctl-0.5.0_amd64.deb
-    sudo apt-get install ./playerctl-0.5.0_amd64.deb
+    sudo dpkg -i ./playerctl-0.5.0_amd64.deb
     sudo pip install -r requirements.txt
 
 #### Arch Linux:
