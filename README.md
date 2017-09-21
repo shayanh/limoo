@@ -26,4 +26,4 @@ You need python 2.6 or newer python 2.x, [python-pip](https://github.com/pypa/pi
 
 and point your web browser to http://localhost:5000.
 
-You can set your default player showing lyrics in ``settings.py``, otherwise limoo automaticly choose one of available players.
+You can set your default player for showing lyrics in ``settings.py``, otherwise limoo automaticly choose one of available players.
