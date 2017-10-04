@@ -5,12 +5,13 @@ from player_utils import queue, player
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret'
-sio = SocketIO(app, async_mode='threading')
+sio = SocketIO(app)
 
 
 @sio.on('connect')
 def update_index():
-    if player is None or player.props.status != 'Playing':
+    if player is None or player.status == "Stopped":
+    #  or player.props.status != 'Playing':
         return
     artist = player.get_artist()
     title = player.get_title()
