@@ -99,5 +99,6 @@ ENV/
 .mypy_cache/
 
 .idea/
+.vscode/
 
 playerctl-*.deb
