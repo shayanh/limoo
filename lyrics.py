@@ -6,7 +6,7 @@ import requests
 from cache import LimooCache
 from server import sio
 
-LIMOO_SERVER = 'limoo.shayanh.ir'
+LIMOO_SERVER = 'circular-answer-220212.appspot.com'
 cache = LimooCache()
 
 
@@ -22,7 +22,7 @@ class Lyrics(object):
         # get_vars = {'artist': artist, 'title': title}
         # url = 'http://%s/lyrics?%s' % (LYRICS_SERVER, urllib.urlencode(get_vars))
         post_data = {'artist': artist, 'title': title}
-        url = 'http://%s/lyrics' % LIMOO_SERVER
+        url = 'https://%s/lyrics' % LIMOO_SERVER
         print url
         try:
             # resp = requests.get(url, timeout=10)
